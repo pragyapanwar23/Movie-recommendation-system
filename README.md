@@ -1,5 +1,6 @@
 # Movie-recommendation-system
 Design and implementation of ML powered movie recommendation system
+
 Problem Statement:
 The vast array of cinematic options presents a delightful yet daunting challenge for film enthusiasts. While the gigantic volume of available movies offers endless possibilities for exploration and identifying titles that align with personal preferences can be a time-consuming process. Build a recommendation system that helps suggest titles of the similar genres as a certain title according to the personal preferences.
 
