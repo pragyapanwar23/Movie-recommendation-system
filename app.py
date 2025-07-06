@@ -23,9 +23,10 @@ def recommend(movie):
     recommended_movies = []
     for i in distances[1:6]:
         row = movies.iloc[i[0]]
-        movie_id = row['movie_id']  # Fixed here
+        movie_id = row['id']  # <-- FIXED here
         recommended_movies.append({'title': row['title'], 'poster': fetch_poster(movie_id)})
     return recommended_movies
+
 
 
 # Page layout
