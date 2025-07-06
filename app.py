@@ -20,7 +20,6 @@ h1 {
 </style>
 """, unsafe_allow_html=True)
 
-# ✅ Centered image using HTML
 st.markdown(
     """
     <div style='text-align: center;'>
