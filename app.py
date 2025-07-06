@@ -28,8 +28,9 @@ def recommend(movie):
     distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
     recommended_movies = []
     for i in distances[1:6]:
-        movie_id = movies.iloc[i[0]]['movie_id']  # Assuming this column is correct
-        recommended_movies.append((movies.iloc[i[0]]['title'], fetch_poster(movie_id)))
+        row = movies.iloc[i[0]]
+        movie_id = row.movie_id
+        recommended_movies.append((row.title, fetch_poster(movie_id)))
     return recommended_movies
 
 # Page layout
