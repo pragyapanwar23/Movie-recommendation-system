@@ -14,19 +14,22 @@ st.markdown("""
 .stApp {
     margin-top: -4rem;
 }
-.stApp img {
-    width: 200px;
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-}
 h1 {
     text-align: center;
 }
 </style>
 """, unsafe_allow_html=True)
 
-st.image("https://is5-ssl.mzstatic.com/image/thumb/Purple112/v4/fc/fe/36/fcfe363e-fd08-cc5f-c85c-f3d16367bb79/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/512x512bb.jpg", width=150)
+# ✅ Centered image using HTML
+st.markdown(
+    """
+    <div style='text-align: center;'>
+        <img src='https://is5-ssl.mzstatic.com/image/thumb/Purple112/v4/fc/fe/36/fcfe363e-fd08-cc5f-c85c-f3d16367bb79/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/512x512bb.jpg' width='150'/>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 st.markdown("<h1>Movie Recommendation System</h1>", unsafe_allow_html=True)
 
 movie_name = st.selectbox("Type in the movie to get recommendations:", movies['title'].values)
