@@ -20,8 +20,7 @@ A content-based movie recommendation system built with **Streamlit**, **Pandas**
 
 ## Link to Streamlit app
 
-https://github.com/pragyapanwar23/Movie-recommendation-system
-
+https://movie-recommendation-system-8u7nup6dvxhvavpwynqvue.streamlit.app/
 
 
 
