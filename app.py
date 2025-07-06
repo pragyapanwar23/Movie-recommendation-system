@@ -78,19 +78,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Title
-st.markdown("<h1 style='text-align: center;'>Movie Recommendation System</h1>", unsafe_allow_html=True)
-
-# Instruction
-st.markdown("<p style='text-align: center; font-size:18px;'>Please select from the existing library</p>", unsafe_allow_html=True)
-
-# Movie select
-selected_movie = st.selectbox("Type in the movie to get recommendations:", movies['title'].values)
-
-# Button
-if st.button('Recommend'):
-    recommendations = recommend(selected_movie)
-
     for name, poster_url in recommendations:
         st.markdown(f"### {name}")
         if poster_url:
