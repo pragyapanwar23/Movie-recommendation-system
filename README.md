@@ -1,8 +1,8 @@
-# 🎬 Movie Recommendation System
+#  Movie Recommendation System
 
 A content-based movie recommendation system built with **Streamlit**, **Pandas**, and **Python**. The app suggests movies similar to the one selected, using precomputed similarity scores and movie metadata.
 
-## 🚀 Features
+##  Features
 
 - Searchable dropdown to select a movie.
 - Returns top 5 similar movies.
@@ -10,7 +10,7 @@ A content-based movie recommendation system built with **Streamlit**, **Pandas**
 - Clean UI with centered branding icon.
 - Built using `Streamlit` for instant web deployment.
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 - Python 3.x
 - Streamlit
@@ -18,12 +18,10 @@ A content-based movie recommendation system built with **Streamlit**, **Pandas**
 - Pickle (for loading preprocessed data)
 - TMDB API (for fetching poster images)
 
-## 📦 Installation
+## Link to Streamlit app
 
-1. **Clone the repository:**
+https://github.com/pragyapanwar23/Movie-recommendation-system
 
-```bash
-git clone https://github.com/your-username/movie-recommendation-system.git
-cd movie-recommendation-system
+
 
 
