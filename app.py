@@ -31,6 +31,7 @@ st.markdown(
 )
 
 st.markdown("<h1>Movie Recommendation System</h1>", unsafe_allow_html=True)
+st.markdown("<h3>Select from the existing library</h3>", unsafe_allow_html=True)
 
 movie_name = st.selectbox("Type in the movie to get recommendations:", movies['title'].values)
 
