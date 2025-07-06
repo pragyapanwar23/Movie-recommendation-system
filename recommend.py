@@ -2,7 +2,6 @@ import zipfile
 import pandas as pd
 import pickle
 
-# Correct file name
 movies_dict = pickle.load(open('movie_dict.pkl', 'rb'))
 movies = pd.DataFrame(movies_dict)
 
