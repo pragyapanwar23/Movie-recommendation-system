@@ -1,3 +1,4 @@
+import zipfile
 import pandas as pd
 import pickle
 
@@ -5,7 +6,9 @@ import pickle
 movies_dict = pickle.load(open('movie_dict.pkl', 'rb'))
 movies = pd.DataFrame(movies_dict)
 
-similarity = pickle.load(open('similarity.pkl', 'rb'))
+with zipfile.ZipFile("similarity.zip", "r") as zip_ref:
+    with zip_ref.open("similarity.pkl") as file:
+        similarity = pickle.load(file)
 
 def recommend(movie_name):
     if movie_name not in movies['title'].values:
