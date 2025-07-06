@@ -1,28 +1,22 @@
 import streamlit as st
 import pickle
 import pandas as pd
+from PIL import Image
 import requests
-import zipfile
-import os
 
-# Extract similarity.pkl from ZIP if not already extracted
-if not os.path.exists("similarity.pkl"):
-    with zipfile.ZipFile("similarity.zip", 'r') as zip_ref:
-        zip_ref.extractall()
-
-# Load movie dictionary and similarity matrix
-movie_dict = pickle.load(open('movie_dict.pkl', 'rb'))
-movies = pd.DataFrame(movie_dict)
+# Load data
+movies_dict = pickle.load(open('movie_dict.pkl', 'rb'))
+movies = pd.DataFrame(movies_dict)
 similarity = pickle.load(open('similarity.pkl', 'rb'))
 
-# Function to fetch poster using TMDB API
+# TMDB API function
 def fetch_poster(movie_id):
     url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key=YOUR_API_KEY_HERE&language=en-US"
     response = requests.get(url)
     data = response.json()
     return f"https://image.tmdb.org/t/p/w500{data['poster_path']}" if data.get("poster_path") else ""
 
-# Recommend function
+# Recommendation logic
 def recommend(movie):
     index = movies[movies['title'] == movie].index[0]
     distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
@@ -30,33 +24,49 @@ def recommend(movie):
     for i in distances[1:6]:
         row = movies.iloc[i[0]]
         movie_id = row.movie_id
-        recommended_movies.append((row.title, fetch_poster(movie_id)))
+        recommended_movies.append({'title': row.title, 'poster': fetch_poster(movie_id)})
     return recommended_movies
 
 # Page layout
-st.set_page_config(layout="centered")
+st.set_page_config(layout="wide")
 
-# Local image (filmicon.png in the same folder)
-st.markdown(
-    """
-    <div style='text-align: center; margin-top: 30px;'>
-        <img src='filmicon.png' width='150'/>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+# Styling
+st.markdown("""
+<style>
+.stApp {
+    margin-top: -4rem;
+}
+.stApp img {
+    width: 200px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+h1 {
+    text-align: center;
+}
+</style>
+""", unsafe_allow_html=True)
 
-# Title and instructions
-st.markdown("<h1 style='text-align: center;'>Movie Recommendation System</h1>", unsafe_allow_html=True)
+# App icon
+st.image("https://is5-ssl.mzstatic.com/image/thumb/Purple112/v4/fc/fe/36/fcfe363e-fd08-cc5f-c85c-f3d16367bb79/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/512x512bb.jpg", width=150)
+
+# Title
+st.markdown("<h1>Movie Recommendation System</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; font-size:18px;'>Please select from the existing library</p>", unsafe_allow_html=True)
 
-# Dropdown for selecting movie
-selected_movie = st.selectbox("Type in the movie to get recommendations:", movies['title'].values)
+# Movie selector
+movie_name = st.selectbox("Type in the movie to get recommendations:", movies['title'].values)
 
 # Recommend button
-if st.button('Recommend'):
-    recommendations = recommend(selected_movie)
-    for name, poster_url in recommendations:
-        st.markdown(f"### {name}")
-        if poster_url:
-            st.image(poster_url)
+if st.button("Recommend"):
+    recommendations = recommend(movie_name)
+
+    if recommendations:
+        for movie in recommendations:
+            st.subheader(movie['title'])
+            if movie['poster']:
+                st.image(movie['poster'])
+            st.markdown("---")
+    else:
+        st.warning("No recommendations found. Try another movie.")
